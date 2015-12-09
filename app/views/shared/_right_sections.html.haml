@@ -45,6 +45,42 @@
            :tutorial => link_to(t('aspects.index.help.tutorial_link_text'), "https://diasporafoundation.org/tutorials", :target => '_blank'),
            :wiki => link_to('Wiki','http://wiki.diasporafoundation.org', :target => '_blank'), :target => '_blank')
 
+.section
+  .title
+    %h5.title-header
+      %i.entypo.mail
+      = t('aspects.index.help.any_problem')
+  .content
+    - if AppConfig.admins.podmin_email.present?
+      %p
+        = t('aspects.index.help.contact_podmin')
+      %p
+        = link_to t('aspects.index.help.mail_podmin'), "mailto:#{AppConfig.admins.podmin_email}", :class => "button"
+    %p
+      = 'LsW* Team-Account. Alle Infos über diesen Pod und die Community:'
+      %a{:href => "https://diaspora.linux-statt-windows.org/u/team"}
+        = 'team@diaspora.linux-statt-windows.org'
+
+.section
+  .title
+    %h5.title-header
+      .icons-forum
+      = 'Forum'
+  .content
+    = 'Fühle dich herzlich im LsW Forum eingeladen:'
+    %a{:href => "http://lsw.io"}
+      = 'Linux statt Windows.org'
+
+.section
+  .title
+    %h5.title-header
+      .icons-mumble
+      = 'Mumble'
+  .content
+    = 'Linux statt Windows.org Mumble-Server:'
+    %a{:href => "mumble://mumble.lsw.io/Eingangshalle?title=Linux%20statt%20Windows&version=1.2.0"}
+      = 'mumble.lsw.io'
+
 - unless AppConfig.configured_services.blank? || all_services_connected?
   .section
     .title
@@ -79,18 +115,6 @@
       %p
         = t('aspects.index.keep_pod_running', :pod => AppConfig.pod_uri.host)
       = render 'shared/donatepod'
-
-- if AppConfig.admins.podmin_email.present?
-  .section
-    .title
-      %h5.title-header
-        %i.entypo.mail
-        = t('aspects.index.help.any_problem')
-    .content
-      %p
-        = t('aspects.index.help.contact_podmin')
-      %p
-        = link_to t("aspects.index.help.mail_podmin"), "mailto:#{AppConfig.admins.podmin_email}"
 
 .section
   .title
